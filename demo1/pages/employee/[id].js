@@ -1,11 +1,13 @@
+import Head from 'next/head'
+
 export const getStaticPaths = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/users');
     const data = await res.json();
   
     // map data to an array of path objects with params (id)
-    const paths = data.map(ninja => {
+    const paths = data.map(employee => {
       return {
-        params: { id: ninja.id.toString() }
+        params: { id: employee.id.toString() }
       }
     })
   
@@ -21,18 +23,23 @@ export const getStaticPaths = async () => {
     const data = await res.json();
   
     return {
-      props: { ninja: data }
+      props: { employee: data }
     }
   }
   
-  const Details = ({ ninja }) => {
+  const Details = ({ employee }) => {
     return (
+      <>
+    <Head>
+            <title>Talha Hussain | API Call</title>
+            <meta name="Talha Hussain Bhutto" content="Introductory Website" />
+        </Head>
       <div>
-        <h1>{ ninja.name }</h1>
-        <p>{ ninja.email }</p>
-        <p>{ ninja.website }</p>
-        <p>{ ninja.address.city }</p>
-      </div>
+        <h1>{ employee.name }</h1>
+        <p>{ employee.email }</p>
+        <p>{ employee.website }</p>
+        <p>{ employee.address.city }</p>
+      </div></>
     );
   }
   
